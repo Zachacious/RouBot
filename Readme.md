@@ -10,9 +10,11 @@ This was a weekend experiment inspired by a mis-titled Youtube video. It uses a 
 
 ## Pre-req:
 
-You will need to install [Tesseract-OCR](https://github.com/UB-Mannheim/tesseract/wiki). You need to be able to call it from the command line. Most likely you'll need to add the following environmental variable: `C:\Program Files\Tesseract-OCR\tessdata\`
+You will need to install [Tesseract-OCR](https://github.com/UB-Mannheim/tesseract/wiki). You need to be able to call it from the command line. Most likely you'll need to add the following environmental variable: `C:\Program Files\Tesseract-OCR\tessdata\` to PATH.
 
-## Install
+## Install (Windows Only)
+
+If you'd like to install it on Mac or *nix, you'll need to replace all the Windows API stuff with cross-platform or os specific equivalents.
 
 + clone or download
 
