@@ -47,6 +47,9 @@ blackCoords = []
 numblock = ()
 balanceBlock = ()
 
+redcol = [1456, 894]
+blackcol = [1380, 946]
+
 # ------------- Windows Api ------------- #
 
 def leftClick():
@@ -179,10 +182,14 @@ def betRed(e):
     ''' bets red '''
     mousePos(redCoords)
     leftClick()
+    mousePos(redcol)
+    leftClick()
     
 def betBlack(e):
     ''' bets black '''
     mousePos(blackCoords)
+    leftClick()
+    mousePos(blackcol)
     leftClick()
     
 def placeBets(col):
@@ -366,14 +373,18 @@ def playGame(e):
         betAmount *= 2
     else:
         betAmount = 1
+        
+    betAmount = 1
     
     # check if betamount is greater than max bet and set
     if betAmount > maxbet:
         maxbet = betAmount # keep track of the maximum bet for the session
         
+    streak, recentStreak = getStreak(0)
+        
     # place bets
     # if streak - chase the streak - bet same color as last drawn
-    if getStreak(0):
+    if streak:
         print('STREAK')
         placeBets(getLastDrawnColor(0))
         time.sleep(1)
