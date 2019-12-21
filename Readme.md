@@ -6,9 +6,7 @@
 
 ![Roubot in action](screen.webp)
 
-This was a weekend experiment inspired by a mis-titled Youtube video. It uses a progressive strategy to double up after losses so it never loses. Don't get too excited. With a betting unit of $1 and a max bet of $500 it does well most of the time, but one bad session can still be catastrophic.
-
-This is one of the coolest projects I've done in a while. The coolest thing is how suprizingly simple it is(a little over 400 LOC). While I can't advise using bots in online casinos(with real money), a project like this could be used to automate many routine task.
+This was a weekend experiment inspired by a mis-titled Youtube video. It uses a progressive strategy to double up after losses so it never loses. Don't get too excited though. With a betting unit of $1 and a max bet of $500 it does well most of the time, but one bad session can be catastrophic. Still, it's empowering to watch it make 'play' money all on its own.
 
 ## Pre-req:
 
@@ -40,7 +38,7 @@ You will need to install [Tesseract-OCR](https://github.com/UB-Mannheim/tesserac
 
 Once you finish the configuration, the bot will begin automatically
 
-Please note that it can be difficult to get tesseract to read the game data properly. Depending on the casino you use, you may need to make adjustments to the image manipulations performed on the snapshots of the balance area and the number area to get tesseract-OCR to give you the correct output.
+Please note that it can be difficult to get tesseract to read the game data properly. Depending on the casino you use, you may need to make adjustments to the image manipulations performed on the snapshots of the balance area and the number area to get tesseract-OCR to give you the correct values.
 
 ## Questions:
 
