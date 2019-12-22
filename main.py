@@ -38,6 +38,8 @@ startBalance = 0
 
 streakThresh = 2 # the threshold for what is considered a streak -- ex: 2 reds in a row
 
+skipRound = False # used after a loss to skip one round (Try to hedge against long losing streaks?)
+
 # these are configured to hold the coords of the important places on the game board that
 #the bot will use to read data and  play the game
 spinBtnCoords = []
@@ -187,7 +189,11 @@ def betBlack(e):
     
 def placeBets(col):
     ''' places (betAmount) of bets on the given color '''
-    if col == 'red':
+    if col == 'both':
+        for i in range(0, betAmount):
+            betRed(0)
+            betBlack(0)
+    elif col == 'red':
         for i in range(0, betAmount):
             betRed(0)
     else:
@@ -342,6 +348,7 @@ def playGame(e):
     global betAmount
     global maxbet
     global startTime
+    global skipRound
     
     print('Started: ' + str(startTime))
     profit = getBalance(0) - startBalance
@@ -359,13 +366,19 @@ def playGame(e):
     print('Balance: $' + str(balance))
     
     # log num color
-    colorLog.append(getLastDrawnColor(0))
+    lastcol = getLastDrawnColor(0)
+    if not (lastcol == 'green'):
+        colorLog.append(lastcol)
     
     # if we took a loss last round, double the bet amount:
     if lastdiff < 0:
-        betAmount *= 2
+        if not skipRound:
+            betAmount *= 2
+        skipRound = not skipRound
     else:
-        betAmount = 1
+        if not skipRound:
+            betAmount = 1
+        skipRound = False
             
     # check if betamount is greater than max bet and set
     if betAmount > maxbet:
@@ -375,12 +388,15 @@ def playGame(e):
         
     # place bets
     # if streak - chase the streak - bet same color as last drawn
-    if streak:
+    if skipRound:
+        placeBets('both')
+        time.sleep(1)
+    elif streak:
         print('STREAK')
-        placeBets(getLastDrawnColor(0))
+        placeBets(lastcol)
         time.sleep(1)
     else: # not on a streak
-        placeBets(getOppCol(getLastDrawnColor(0))) # bet opposite
+        placeBets(getOppCol(lastcol)) # bet opposite
         time.sleep(1)
         
     # spin
